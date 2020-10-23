@@ -1,2 +1,2 @@
 logging:
-  config: classpath:/test/log4j2.xml
+  config: classpath:test/log4j2.xml
