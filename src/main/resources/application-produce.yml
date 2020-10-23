@@ -1,2 +1,2 @@
 logging:
-  config: classpath:/produce/log4j2.xml
+  config: classpath:produce/log4j2.xml
