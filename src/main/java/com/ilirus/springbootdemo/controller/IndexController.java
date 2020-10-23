@@ -1,12 +1,16 @@
 package com.ilirus.springbootdemo.controller;
 
+import com.ilirus.springbootdemo.dao.DemoDao;
 import com.ilirus.springbootdemo.model.Env;
+import com.ilirus.springbootdemo.model.po.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * @author wan
@@ -17,9 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/")
 public class IndexController {
     private final Env env;
+    private final DemoDao dao;
 
-    public IndexController(Env env) {
+    public IndexController(Env env, DemoDao dao) {
         this.env = env;
+        this.dao = dao;
     }
 
     private static final Logger log = LoggerFactory.getLogger(IndexController.class);
@@ -37,5 +43,11 @@ public class IndexController {
     @ResponseBody
     public Env getEnvInfo() {
         return env;
+    }
+
+    @GetMapping("/db")
+    @ResponseBody
+    public List<User> getUser() {
+        return dao.query();
     }
 }

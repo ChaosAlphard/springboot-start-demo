@@ -21,3 +21,18 @@ env:
     key2: value2
 logging:
   config: classpath:/dev/log4j2.xml
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    hikari:
+      idle-timeout: 300000
+      connection-timeout: 5000
+
+mybatis:
+  config-location: classpath:/mybatis/mybatis-config.xml
+  mapper-locations: classpath:/mybatis/mapper/*Mapper.xml
+  check-config-location: true
