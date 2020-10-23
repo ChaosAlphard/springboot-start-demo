@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="OFF" monitorInterval="600">
+
+  <Properties>
+    <Property name="PATH" value="${sys:catalina.home}/logs" />
+    <Property name="LOG_FORMAT" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %l [%5p]: %m%n" />
+  </Properties>
+
+  <Appenders>
+
+    <RollingFile name="LOG_FILE" fileName="${PATH}/server.log" filePattern="${PATH}/archive/$${date:yyyy-MM}/%d{yyyy-MM-dd}.%i.log.gz">
+      <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+      <PatternLayout pattern="${LOG_FORMAT}"/>
+
+      <Policies>
+        <CronTriggeringPolicy schedule="0 0 0 * * ?"/>
+        <SizeBasedTriggeringPolicy size="20 MB"/>
+      </Policies>
+
+      <DefaultRolloverStrategy max="90"/>
+    </RollingFile>
+
+  </Appenders>
+
+  <Loggers>
+    <Root level="WARN">
+      <AppenderRef ref="LOG_FILE"/>
+    </Root>
+  </Loggers>
+</configuration>

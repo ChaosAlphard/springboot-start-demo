@@ -1,0 +1,12 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  text-align: center;
+  font-size: 24px;
+  color: cadetblue;
+  border-radius: 30px;
+  box-shadow: 0 0 20px 0 aquamarine inset;
+}

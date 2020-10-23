@@ -1,0 +1,23 @@
+env:
+  name: dev
+  des: 开发环境
+  list:
+    list1: [1,2,3,4]
+    list2: &list
+      - Apple
+      - Banana
+      - Pair
+  object-list1:
+    -
+      id: 1
+      name: Ilirus
+    -
+      id: 2
+      name: Erina
+  object-list2: [{id: 1, name: ilirus},{id: 2, name: erina}]
+  list-copy <<: *list
+  map:
+    key: value
+    key2: value2
+logging:
+  config: classpath:/dev/log4j2.xml

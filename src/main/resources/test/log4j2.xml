@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN" monitorInterval="10">
+
+  <Properties>
+    <Property name="PATH" value="${sys:catalina.home}/logs" />
+    <Property name="CONSOLE_FORMAT" value="%d{HH:mm:ss.SSS} %80.80l [%highlight{%5p}]: %m%n" />
+    <Property name="LOG_FORMAT" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %l [%5p]: %m%n" />
+  </Properties>
+
+  <Appenders>
+
+    <Console name="CONSOLE" target="SYSTEM_OUT">
+      <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+      <PatternLayout pattern="${CONSOLE_FORMAT}" disableAnsi="false"/>
+    </Console>
+
+    <File name="DISPOSABLE_LOG" fileName="${PATH}/current-run.log" append="false">
+      <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+      <PatternLayout pattern="${LOG_FORMAT}"/>
+    </File>
+
+    <RollingFile name="LOG_FILE" fileName="${PATH}/server.log" filePattern="${PATH}/archive/$${date:yyyy-MM}/%d{yyyy-MM-dd}.%i.log.gz">
+      <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+      <PatternLayout pattern="${LOG_FORMAT}"/>
+
+      <Policies>
+        <CronTriggeringPolicy schedule="0 0 0 * * ?"/>
+        <SizeBasedTriggeringPolicy size="20 MB"/>
+      </Policies>
+
+      <DefaultRolloverStrategy max="90"/>
+    </RollingFile>
+
+  </Appenders>
+
+  <Loggers>
+    <Logger name="org.springframework" level="INFO" additivity="false">
+      <AppenderRef ref="CONSOLE"/>
+      <AppenderRef ref="DISPOSABLE_LOG"/>
+    </Logger>
+    <Logger name="com.ilirus.springbootdemo" level="DEBUG" additivity="false">
+      <AppenderRef ref="CONSOLE"/>
+      <AppenderRef ref="LOG_FILE"/>
+      <AppenderRef ref="DISPOSABLE_LOG"/>
+    </Logger>
+
+    <Root level="INFO">
+      <AppenderRef ref="CONSOLE"/>
+      <AppenderRef ref="LOG_FILE"/>
+      <AppenderRef ref="DISPOSABLE_LOG"/>
+    </Root>
+  </Loggers>
+</configuration>
