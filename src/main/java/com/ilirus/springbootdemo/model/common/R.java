@@ -24,6 +24,14 @@ public class R<T> {
         return new R<>(true, ServerEnum.SUCCESS, data);
     }
 
+    public static <T> R<T> ofFail() {
+        return new R<>(false, ServerEnum.FAIL, null);
+    }
+
+    public static <T> R<T> ofFail(T data) {
+        return new R<>(false, ServerEnum.FAIL, data);
+    }
+
     private R(boolean success, int code, String message, T data) {
         this.success = success;
         this.code = code;
