@@ -26,12 +26,12 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public R<Object> argNotValidErr(MethodArgumentNotValidException e) {
+    public R<List<Map<String, Object>>> argNotValidErr(MethodArgumentNotValidException e) {
         return R.ofFail(getValidError(e.getBindingResult()));
     }
 
     @ExceptionHandler(BindException.class)
-    public R<Object> argNotValidErr(BindException e) {
+    public R<List<Map<String, Object>>> argNotValidErr(BindException e) {
         return R.ofFail(getValidError(e.getBindingResult()));
     }
 
@@ -49,8 +49,8 @@ public class GlobalExceptionHandler {
         for(FieldError error : result.getFieldErrors()) {
             lis.add(new HashMap<>(){{
                 put("field", error.getField());
-                put("value", error.getRejectedValue());
                 put("message", error.getDefaultMessage());
+                put("rejectValue", error.getRejectedValue());
             }});
         }
 
