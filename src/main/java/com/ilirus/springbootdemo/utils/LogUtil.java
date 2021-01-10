@@ -1,5 +1,6 @@
 package com.ilirus.springbootdemo.utils;
 
+import com.ilirus.springbootdemo.asserts.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.helpers.MessageFormatter;
@@ -15,8 +16,11 @@ import java.util.Arrays;
 public class LogUtil {
     private static final Logger log = LoggerFactory.getLogger(LogUtil.class);
 
+    private static final int DEFAULT_STACK_LINE = 18;
+
     private static final String[] IGNORE_CLASS = {
-            LogUtil.class.getName()
+            LogUtil.class.getName(),
+            Assert.class.getName()
     };
 
     public static void debug(String s) {
@@ -54,7 +58,7 @@ public class LogUtil {
     /**
      * 打印错误信息以及部分堆栈追踪
      * @param e 错误
-     * @param limit 限制堆栈追踪的数量, 默认6条
+     * @param limit 限制堆栈追踪的数量, 默认18条
      * @param message 额外的信息
      */
     public static void limitedStackTrace(Exception e, int limit, String message) {
@@ -79,11 +83,11 @@ public class LogUtil {
     }
 
     public static void limitedStackTrace(Exception e, String format, Object... args) {
-        limitedStackTrace(e, 6, toLogStr(format, format(args)));
+        limitedStackTrace(e, DEFAULT_STACK_LINE, toLogStr(format, format(args)));
     }
 
     public static void limitedStackTrace(Exception e, String message) {
-        limitedStackTrace(e, 6, message);
+        limitedStackTrace(e, DEFAULT_STACK_LINE, message);
     }
 
     public static void limitedStackTrace(Exception e, int limit) {
@@ -91,7 +95,7 @@ public class LogUtil {
     }
 
     public static void limitedStackTrace(Exception e) {
-        limitedStackTrace(e, 6, "详细信息 ↓");
+        limitedStackTrace(e, DEFAULT_STACK_LINE, "详细信息 ↓");
     }
 
     public static String toLogStr(String format, Object... args) {

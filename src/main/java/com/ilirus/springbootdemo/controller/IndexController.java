@@ -1,11 +1,10 @@
 package com.ilirus.springbootdemo.controller;
 
+import com.ilirus.springbootdemo.handler.annotation.ApiController;
 import com.ilirus.springbootdemo.model.Env;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -13,8 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @version 1.0.0
  * Date 2020/10/23 01:48
  */
-@Controller
-@RequestMapping("/")
+@ApiController("/")
 public class IndexController {
     private final Env env;
 
