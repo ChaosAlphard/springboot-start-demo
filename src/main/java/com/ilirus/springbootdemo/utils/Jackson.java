@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.ilirus.springbootdemo.utils.extra.jackson.LocalDateSerializer;
 import com.ilirus.springbootdemo.utils.extra.jackson.LocalDateTimeSerializer;
+import com.ilirus.springbootdemo.utils.extra.vavr.Vavr;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,7 +28,8 @@ public class Jackson {
             .registerModule(new SimpleModule()
                     .addSerializer(LocalDateTime.class, new LocalDateTimeSerializer())
                     .addSerializer(LocalDate.class, new LocalDateSerializer())
-            );
+            )
+            .registerModule(Vavr.defaultInstance());
 
     public static ObjectMapper newInstance() {
         return mapper.copy();
