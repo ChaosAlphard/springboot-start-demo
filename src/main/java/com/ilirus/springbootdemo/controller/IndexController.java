@@ -1,6 +1,7 @@
 package com.ilirus.springbootdemo.controller;
 
 import com.ilirus.springbootdemo.handler.annotation.ApiController;
+import com.ilirus.springbootdemo.handler.annotation.UserId;
 import com.ilirus.springbootdemo.handler.annotation.WithResponseHandler;
 import com.ilirus.springbootdemo.model.Env;
 import com.ilirus.springbootdemo.model.RetrofitTest;
@@ -32,7 +33,8 @@ public class IndexController {
     }
 
     @GetMapping
-    public String index() {
+    public String index(@UserId Integer id) {
+        System.out.println("自动注入id: "+id);
         return "index";
     }
 

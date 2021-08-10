@@ -23,6 +23,10 @@ public class LogUtil {
             Assert.class.getName()
     };
 
+    public static Logger getLogger() {
+        return log;
+    }
+
     public static void debug(String s) {
         log.debug(getTracedLog(s));
     }
