@@ -34,5 +34,14 @@ spring:
 
 mybatis:
   config-location: classpath:/mybatis/mybatis-config.xml
-  mapper-locations: classpath:/mybatis/mapper/*Mapper.xml
+  mapper-locations: classpath:/mybatis/**/*Mapper.xml
   check-config-location: true
+
+mybatis-plus:
+  mapper-locations: classpath:/mybatis/**/*Mapper.xml
+  type-aliases-package: com.ilirus.springbootdemo.model.po
+  global-config:
+    db-config:
+      id-type: auto
+      insert-strategy: not_null
+      update-strategy: not_null
